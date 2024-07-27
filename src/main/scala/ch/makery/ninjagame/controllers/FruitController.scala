@@ -9,7 +9,7 @@ object FruitController {
     val x = Random.nextDouble() * 800
     val y = 600 // Spawn from below
     val velocityX = Random.nextDouble() * 2 - 1 // Reduced horizontal velocity
-    val velocityY = -6 - Random.nextDouble() * 2 // Reduced initial upward velocity
+    val velocityY = -8 - Random.nextDouble() * 2 // Make fruits fly as high as the bomb
     val points = Random.nextInt(10) match {
       case n if n < 5 => 1 // Common fruit
       case n if n < 8 => 5 // Uncommon fruit

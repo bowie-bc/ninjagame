@@ -37,4 +37,3 @@ class GameController(val gc: GraphicsContext) {
     startGameLoop()
   }
 }
-
