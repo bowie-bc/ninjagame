@@ -6,7 +6,7 @@ import scalafx.scene.paint.Color
 case class Blade(points: List[(Double, Double)]) {
 
   def addPoint(x: Double, y: Double): Blade = {
-    Blade((x, y) :: points)
+    Blade((x, y) :: points.take(10)) // Keep only the latest 10 points
   }
 
   def draw(gc: GraphicsContext): Unit = {

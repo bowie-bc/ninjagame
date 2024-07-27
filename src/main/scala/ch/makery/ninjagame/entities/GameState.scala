@@ -14,7 +14,6 @@ class GameState(val gc: GraphicsContext) {
   var gameOver: Boolean = false
   var level: Int = 0
   var lives: Int = 3
-  var bombSliced: Boolean = false
 
   def update(mouseX: Double, mouseY: Double, isMouseDown: Boolean): Unit = {
     if (gameOver) return
@@ -35,12 +34,12 @@ class GameState(val gc: GraphicsContext) {
 
     // Check if all fruits and bombs are off the screen and conditions to proceed to the next level are met
     if (fruits.isEmpty && bombs.isEmpty && !gameOver) {
-      println(s"Fruits and bombs are empty. Bomb sliced: $bombSliced, All fruits sliced: ${allFruitsSliced}")
-      if (!bombSliced && allFruitsSliced) {
+      println(s"Fruits and bombs are empty. All fruits sliced: ${allFruitsSliced}")
+      if (allFruitsSliced) {
         nextLevel()
       } else {
         gameOver = true
-        println("Game over. Either bomb was sliced or some fruits were missed.")
+        println("Game over. Some fruits were missed.")
       }
     }
   }
@@ -79,7 +78,7 @@ class GameState(val gc: GraphicsContext) {
       if (blade.points.exists { case (x, y) => bomb.isHit(x, y) }) {
         SoundManager.playSound("/explosion.mp3")
         println("Hit a bomb! Game over.")
-        bombSliced = true
+        gameOver = true
         true
       } else {
         false
@@ -153,7 +152,6 @@ class GameState(val gc: GraphicsContext) {
     // Clear existing fruits and bombs
     fruits = List()
     bombs = List()
-    bombSliced = false
 
     val fruitsToSpawn = 3 + level // Start with 3 fruits, increase by 1 each level
     println(s"Spawning $fruitsToSpawn fruits for level $level")
