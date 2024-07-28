@@ -5,6 +5,7 @@ import scalafx.scene.canvas.GraphicsContext
 import scala.ch.makery.ninjagame.utilities.SoundManager
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, FontWeight}
+import scala.util.Random
 
 class GameState(val gc: GraphicsContext) {
   var fruits: List[Fruit] = List()
@@ -32,7 +33,6 @@ class GameState(val gc: GraphicsContext) {
 
     moveEntities()
 
-    // Check if all fruits and bombs are off the screen and conditions to proceed to the next level are met
     if (fruits.isEmpty && bombs.isEmpty && !gameOver) {
       println(s"Fruits and bombs are empty. All fruits sliced: ${allFruitsSliced}")
       if (allFruitsSliced) {
@@ -48,7 +48,7 @@ class GameState(val gc: GraphicsContext) {
     fruits.foreach(_.move())
     fruits = fruits.filterNot { fruit =>
       val offScreen = fruit.y > 600
-      if (offScreen) {
+      if (offScreen && !fruit.isSliced) {
         lives -= 1
         println(s"Missed a fruit! Lives left: $lives")
       }
@@ -64,11 +64,11 @@ class GameState(val gc: GraphicsContext) {
 
   def checkCollisions(): Unit = {
     fruits = fruits.filterNot { fruit =>
-      if (fruit.isSliced(blade.points.map(_._1), blade.points.map(_._2))) {
+      if (fruit.slice(blade.points.map(_._1), blade.points.map(_._2))) {
         score += fruit.points
         SoundManager.playSound("/slice.mp3")
         println(s"Sliced a fruit worth ${fruit.points} points! Score: $score")
-        true
+        false // Do not remove the fruit from the list to keep drawing the sliced image
       } else {
         false
       }
@@ -101,17 +101,9 @@ class GameState(val gc: GraphicsContext) {
 
     blade.draw(gc)
 
-    fruits.foreach { fruit =>
-      gc.fill = fruit.color
-      gc.fillRect(fruit.x, fruit.y, fruit.width, fruit.height)
-      println(s"Drawing fruit at (${fruit.x}, ${fruit.y}) with color ${fruit.color}")
-    }
+    fruits.foreach(_.draw(gc))
 
-    bombs.foreach { bomb =>
-      gc.fill = bomb.color
-      gc.fillRect(bomb.x, bomb.y, bomb.width, bomb.height)
-      println(s"Drawing bomb at (${bomb.x}, ${bomb.y}) with color ${bomb.color}")
-    }
+    bombs.foreach(_.draw(gc))
 
     drawScore()
     drawLives()
@@ -160,14 +152,15 @@ class GameState(val gc: GraphicsContext) {
     fruits = List()
     bombs = List()
 
-    val fruitsToSpawn = 3 + level // Start with 3 fruits, increase by 1 each level
+    val fruitsToSpawn = Random.nextInt(9) + 1 // Random number of fruits between 1 and 10
     println(s"Spawning $fruitsToSpawn fruits for level $level")
     for (_ <- 1 to fruitsToSpawn) {
       addFruit(FruitController.createFruit())
     }
 
-    // Add a bomb for each level along with fruits
-    println("Spawning a bomb for this level")
-    addBomb(BombController.createBomb())
+    // Add a random number of bombs (up to 3) for each level along with fruits
+    val bombsToSpawn = Random.nextInt(3)  // Random number of bombs between 1 and 3
+    println(s"Spawning $bombsToSpawn bombs for this level")
+    BombController.createBombs(bombsToSpawn).foreach(addBomb)
   }
 }
