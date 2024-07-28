@@ -4,19 +4,17 @@ import scalafx.scene.image.Image
 import scalafx.scene.paint.Color
 import scalafx.scene.canvas.GraphicsContext
 
-case class Fruit(
-                  var x: Double,
-                  var y: Double,
-                  var width: Double,
-                  var height: Double,
-                  var color: Color,
-                  var velocityX: Double,
-                  var velocityY: Double,
-                  var points: Int,
-                  var weight: Double,
-                  var gravity: Double = 0.1,
-                  var unslicedImage: Image,
-                  var slicedImage: Image
+case class Fruit(var x: Double,
+                 var y: Double,
+                 var width: Double,
+                 var height: Double,
+                 var velocityX: Double,
+                 var velocityY: Double,
+                 var points: Int,
+                 var weight: Double,
+                 var gravity: Double = 0.1,
+                 var unslicedImage: Image,
+                 var slicedImage: Image
                 ) {
   var isSliced: Boolean = false
 

@@ -36,14 +36,10 @@ object FruitController {
       case "banana" => 5
       case "orange" => 10
     }
-    val color = fruitType match {
-      case "apple" => Color.Red
-      case "banana" => Color.Yellow
-      case "orange" => Color.Orange
-    }
+
     val unslicedImage = unslicedImages(fruitType)
     val slicedImage = slicedImages(fruitType)
 
-    Fruit(x, y, 50, 50, color, velocityX, velocityY, points, weight, 0.1, unslicedImage, slicedImage)
+    Fruit(x, y, 150, 150, velocityX, velocityY, points, weight, 0.1, unslicedImage, slicedImage)
   }
 }

@@ -6,6 +6,8 @@ import scala.ch.makery.ninjagame.utilities.SoundManager
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, FontWeight}
 import scala.util.Random
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class GameState(val gc: GraphicsContext) {
   var fruits: List[Fruit] = List()
@@ -76,10 +78,11 @@ class GameState(val gc: GraphicsContext) {
 
     bombs = bombs.filterNot { bomb =>
       if (blade.points.exists { case (x, y) => bomb.isHit(x, y) }) {
+        bomb.slice()
         SoundManager.playSound("/explosion.mp3")
         println("Hit a bomb! Game over.")
         gameOver = true
-        true
+        false // Do not remove the bomb from the list to keep drawing the bombed image
       } else {
         false
       }
@@ -105,34 +108,34 @@ class GameState(val gc: GraphicsContext) {
 
     bombs.foreach(_.draw(gc))
 
-    drawScore()
-    drawLives()
-    drawLevel()
+//    drawScore()
+//    drawLives()
+//    drawLevel()
 
     if (gameOver) {
       drawGameOver()
     }
   }
 
-  def drawScore(): Unit = {
-    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
-    gc.setFill(Color.Black)
-    gc.fillText(s"Score: $score", 10, 40)
-  }
-
-  def drawLives(): Unit = {
-    val heartRadius = 15
-    for (i <- 0 until lives) {
-      gc.setFill(Color.Red)
-      gc.fillOval(700 + i * (heartRadius * 2 + 10), 10, heartRadius * 2, heartRadius * 2)
-    }
-  }
-
-  def drawLevel(): Unit = {
-    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
-    gc.setFill(Color.Black)
-    gc.fillText(s"Level: $level", 10, 80)
-  }
+//  def drawScore(): Unit = {
+//    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
+//    gc.setFill(Color.Black)
+//    gc.fillText(s"Score: $score", 10, 40)
+//  }
+//
+//  def drawLives(): Unit = {
+//    val heartRadius = 15
+//    for (i <- 0 until lives) {
+//      gc.setFill(Color.Red)
+//      gc.fillOval(700 + i * (heartRadius * 2 + 10), 10, heartRadius * 2, heartRadius * 2)
+//    }
+//  }
+//
+//  def drawLevel(): Unit = {
+//    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
+//    gc.setFill(Color.Black)
+//    gc.fillText(s"Level: $level", 10, 80)
+//  }
 
   def drawGameOver(): Unit = {
     gc.setFont(Font.font("Arial", FontWeight.Bold, 72))
@@ -152,15 +155,27 @@ class GameState(val gc: GraphicsContext) {
     fruits = List()
     bombs = List()
 
-    val fruitsToSpawn = Random.nextInt(9) + 1 // Random number of fruits between 1 and 10
+    val fruitsToSpawn = Random.nextInt(8) + 3 // Random number of fruits between 3 and 10
     println(s"Spawning $fruitsToSpawn fruits for level $level")
     for (_ <- 1 to fruitsToSpawn) {
       addFruit(FruitController.createFruit())
     }
 
     // Add a random number of bombs (up to 3) for each level along with fruits
-    val bombsToSpawn = Random.nextInt(3)  // Random number of bombs between 1 and 3
+    val bombsToSpawn = Random.nextInt(3) + 1 // Random number of bombs between 1 and 3
     println(s"Spawning $bombsToSpawn bombs for this level")
     BombController.createBombs(bombsToSpawn).foreach(addBomb)
+  }
+
+  def startGameLoop(): Unit = {
+    println("Starting game loop")
+    Future {
+      while (!gameOver) {
+        Thread.sleep(30)
+        updateEntities()
+        drawEntities()
+      }
+      drawEntities() // Final draw to display game over screen
+    }
   }
 }

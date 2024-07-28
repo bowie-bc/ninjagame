@@ -1,8 +1,8 @@
-[error] sbt.librarymanagement.ResolveException: Error downloading org.scalafx:scalafx_2.12:8.0.192-R12
+[error] sbt.librarymanagement.ResolveException: Error downloading org.scalafxml:scalafxml-macros-sfx8_2.12:0.5
 [error]   Not found
 [error]   Not found
-[error]   not found: C:\Users\bowie\.ivy2\localorg.scalafx\scalafx_2.12\8.0.192-R12\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/scalafx/scalafx_2.12/8.0.192-R12/scalafx_2.12-8.0.192-R12.pom
+[error]   not found: C:\Users\bowie\.ivy2\localorg.scalafxml\scalafxml-macros-sfx8_2.12\0.5\ivys\ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/org/scalafxml/scalafxml-macros-sfx8_2.12/0.5/scalafxml-macros-sfx8_2.12-0.5.pom
 [error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:346)
 [error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$39(CoursierDependencyResolution.scala:315)
 [error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
@@ -31,8 +31,8 @@
 [error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 [error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 [error] 	at java.lang.Thread.run(Thread.java:750)
-[error] (ssExtractDependencies) sbt.librarymanagement.ResolveException: Error downloading org.scalafx:scalafx_2.12:8.0.192-R12
+[error] (ssExtractDependencies) sbt.librarymanagement.ResolveException: Error downloading org.scalafxml:scalafxml-macros-sfx8_2.12:0.5
 [error]   Not found
 [error]   Not found
-[error]   not found: C:\Users\bowie\.ivy2\localorg.scalafx\scalafx_2.12\8.0.192-R12\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/scalafx/scalafx_2.12/8.0.192-R12/scalafx_2.12-8.0.192-R12.pom
+[error]   not found: C:\Users\bowie\.ivy2\localorg.scalafxml\scalafxml-macros-sfx8_2.12\0.5\ivys\ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/org/scalafxml/scalafxml-macros-sfx8_2.12/0.5/scalafxml-macros-sfx8_2.12-0.5.pom

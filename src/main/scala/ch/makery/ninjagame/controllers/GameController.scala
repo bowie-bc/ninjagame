@@ -1,39 +1,48 @@
 package scala.ch.makery.ninjagame.controllers
 
-import scala.ch.makery.ninjagame.entities.GameState
+import scalafx.scene.canvas.Canvas
+import scalafx.scene.control.Label
+import scalafx.scene.input.MouseEvent
 import scalafx.scene.canvas.GraphicsContext
-import javafx.scene.input.MouseEvent
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scalafx.Includes._
+import scala.ch.makery.ninjagame.entities.GameState
+import scalafxml.core.macros.sfxml
 
-class GameController(val gc: GraphicsContext) {
-  var gameState = new GameState(gc)
+@sfxml
+class GameController(private val gameCanvas: Canvas,
+                     private val scoreLabel: Label,
+                     private val livesLabel: Label,
+                     private val levelLabel: Label) {
 
-  def handleMouseDrag(e: MouseEvent): Unit = {
-    gameState.update(e.getX, e.getY, isMouseDown = true)
+  private var gc: GraphicsContext = _
+  private var gameState: GameState = _
+
+
+  println("GameController initialized")
+  gc = gameCanvas.graphicsContext2D
+  gameState = new GameState(gc)
+
+  // Handle mouse events
+  gameCanvas.onMouseDragged = (e: MouseEvent) => gameState.update(e.x, e.y, isMouseDown = true)
+  gameCanvas.onMouseReleased = (e: MouseEvent) => gameState.update(e.x, e.y, isMouseDown = false)
+  gameCanvas.onMousePressed = (e: MouseEvent) => gameState.update(e.x, e.y, isMouseDown = true)
+
+  // Start the game
+  startGame()
+
+  private def startGame(): Unit = {
+    println("Starting game")
+    gameState.startGameLoop()
+    updateUI()
   }
 
-  def handleMouseRelease(e: MouseEvent): Unit = {
-    gameState.update(e.getX, e.getY, isMouseDown = false)
-  }
+  private def updateUI(): Unit = {
+    scoreLabel.text = s"Score: ${gameState.score}"
+    livesLabel.text = s"Lives: ${gameState.lives}"
+    levelLabel.text = s"Level: ${gameState.level}"
 
-  def handleMousePress(e: MouseEvent): Unit = {
-    gameState.update(e.getX, e.getY, isMouseDown = true)
-  }
-
-  def startGameLoop(): Unit = {
-    Future {
-      while (!gameState.gameOver) {
-        Thread.sleep(30)
-        gameState.updateEntities()
-        gameState.drawEntities()
-      }
-      gameState.drawEntities() // Final draw to display game over screen
+    if (!gameState.gameOver) {
+      javafx.application.Platform.runLater(() => updateUI())
     }
-  }
-
-  def startGame(): Unit = {
-    gameState.nextLevel()
-    startGameLoop()
   }
 }
