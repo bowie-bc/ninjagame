@@ -115,6 +115,7 @@ class GameState(val gc: GraphicsContext) {
 
     drawScore()
     drawLives()
+    drawLevel()
 
     if (gameOver) {
       drawGameOver()
@@ -133,6 +134,12 @@ class GameState(val gc: GraphicsContext) {
       gc.setFill(Color.Red)
       gc.fillOval(700 + i * (heartRadius * 2 + 10), 10, heartRadius * 2, heartRadius * 2)
     }
+  }
+
+  def drawLevel(): Unit = {
+    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
+    gc.setFill(Color.Black)
+    gc.fillText(s"Level: $level", 10, 80)
   }
 
   def drawGameOver(): Unit = {
