@@ -10,15 +10,15 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="gameview-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scala.ch.makery.ninjagame.controllers.GameController">
     <Canvas fx:id="gameCanvas" height="600.0" width="800.0" />
-    <Label fx:id="scoreLabel" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" stylesheets="@styles.css" text="Score: 0" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+    <Label fx:id="scoreLabel" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" styleClass="label-medium" stylesheets="@styles.css" text="Score: 0" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
       <font>
          <Font name="System Bold" size="41.0" />
       </font></Label>
-    <Label fx:id="livesLabel" contentDisplay="CENTER" layoutX="650.0" layoutY="10.0" text="Lives: 3" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+    <Label fx:id="livesLabel" contentDisplay="CENTER" layoutX="650.0" layoutY="10.0" styleClass="label-medium" text="Lives: 3" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       <font>
          <Font name="System Bold" size="41.0" />
       </font></Label>
-    <Label fx:id="levelLabel" contentDisplay="CENTER" layoutX="14.0" layoutY="85.0" text="Level: 1" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="85.0">
+    <Label fx:id="levelLabel" contentDisplay="CENTER" layoutX="14.0" layoutY="85.0" styleClass="label-medium" text="Level: 1" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="85.0">
       <font>
          <Font name="System Bold" size="41.0" />
       </font></Label>
@@ -35,5 +35,5 @@
       </children>
    </StackPane>
  <Button fx:id="onMusicButton" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleMusicOn" text="Music On" visible="false" />
-   <Button fx:id="offMusicButton" layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleMusicOff" text="Music Off" />
+   <Button fx:id="offMusicButton" layoutX="14.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleMusicOff" prefHeight="50.0" prefWidth="120.0" text="Music Off" />
 </AnchorPane>

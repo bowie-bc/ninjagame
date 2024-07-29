@@ -15,6 +15,14 @@
 }
 
 .label {
+    -fx-font-size: 15pt;
+    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+    -fx-font-family: "Gayatri";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
+}
+
+.label-medium {
     -fx-font-size: 40pt;
     /*-fx-font-family: "Protest Revolution", sans-serif;*/
     -fx-font-family: "Gayatri";

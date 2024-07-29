@@ -13,12 +13,13 @@ class StartController(private val startButton: Button,
                      ) {
 
   def onStartButtonClick(event: ActionEvent): Unit = {
-    val nickname = nicknameField.text.value.trim
-    if (nickname.nonEmpty) {
-      MainApp.startGame(nickname)
-    } else {
-      println("Nickname cannot be empty")
-    }
+    MainApp.switchToGameScene()
+//    val nickname = nicknameField.text.value.trim
+//    if (nickname.nonEmpty) {
+//
+//    } else {
+//      println("Nickname cannot be empty")
+//    }
   }
 
 
