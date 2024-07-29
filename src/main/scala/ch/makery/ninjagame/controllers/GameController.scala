@@ -7,6 +7,7 @@ import scalafx.scene.control.{Button, Label}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
 import scalafx.Includes._
+import scalafx.application.Platform
 import scalafxml.core.macros.sfxml
 
 import scala.ch.makery.ninjagame.utilities.SoundManager
@@ -16,7 +17,10 @@ class GameController(private val gameCanvas: Canvas,
                      private val scoreLabel: Label,
                      private val livesLabel: Label,
                      private val levelLabel: Label,
-                     private val gameOverPane: StackPane) {
+                     private val gameOverPane: StackPane,
+                     private val onMusicButton: Button,
+                     private val offMusicButton: Button,
+                    ) {
 
   private var gc = gameCanvas.graphicsContext2D
   private var gameState = new GameState(gc)
@@ -26,14 +30,15 @@ class GameController(private val gameCanvas: Canvas,
   gameCanvas.onMouseReleased = (e: MouseEvent) => gameState.update(e.x, e.y, isMouseDown = false)
   gameCanvas.onMousePressed = (e: MouseEvent) => gameState.update(e.x, e.y, isMouseDown = true)
 
-  // Start the game
-  startGame()
+  Platform.runLater {
+    startGame()
+  }
 
   private def startGame(): Unit = {
     println("Starting game")
     println("playing music")
-    SoundManager.loopSound("/sounds/backgroundmusic.mp3")
     gameState.startGameLoop()
+    SoundManager.loopSound("/sounds/backgroundmusic.mp3")
     updateUI()
   }
 
@@ -41,18 +46,12 @@ class GameController(private val gameCanvas: Canvas,
     scoreLabel.text = s"Score: ${gameState.score}"
     livesLabel.text = s"Lives: ${gameState.lives}"
     levelLabel.text = s"Level: ${gameState.level}"
-
-    if (!gameState.gameOver) {
-      javafx.application.Platform.runLater(() => updateUI())
+    if (gameState.gameOver) {
+      gameOverPane.visible = true
+      SoundManager.stopSound("/sounds/backgroundmusic.mp3")
     } else {
       javafx.application.Platform.runLater(() => updateUI())
-      showGameOverOverlay()
-      SoundManager.stopSound("/sounds/backgroundmusic.mp3")
     }
-  }
-
-  private def showGameOverOverlay(): Unit = {
-    gameOverPane.visible = true
   }
 
   def handleRestart(): Unit = {
@@ -73,10 +72,14 @@ class GameController(private val gameCanvas: Canvas,
   def handleMusicOff(): Unit = {
     println("music off button clicked")
     SoundManager.stopSound("/sounds/backgroundmusic.mp3")
+    onMusicButton.visible = true
+    offMusicButton.visible = false
   }
 
   def handleMusicOn(): Unit = {
     println("music on button clicked")
-    SoundManager.playSound("/sounds/backgroundmusic.mp3")
+    SoundManager.loopSound("/sounds/backgroundmusic.mp3")
+    onMusicButton.visible = false
+    offMusicButton.visible = true
   }
 }

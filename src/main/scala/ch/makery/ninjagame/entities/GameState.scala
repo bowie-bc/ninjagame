@@ -2,18 +2,10 @@ package scala.ch.makery.ninjagame.entities
 
 import scala.ch.makery.ninjagame.controllers.{BombController, FruitController}
 import scalafx.scene.canvas.GraphicsContext
-
 import scala.ch.makery.ninjagame.utilities.SoundManager
-import scalafx.scene.paint.Color
-import scalafx.scene.text.{Font, FontWeight}
-
 import scala.util.Random
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-
-
-import scala.ch.makery.ninjagame.MainApp
-
 
 class GameState(val gc: GraphicsContext) {
   var fruits: List[Fruit] = List()
@@ -35,7 +27,6 @@ class GameState(val gc: GraphicsContext) {
 
     checkCollisions()
   }
-
 
   def checkCollisions(): Unit = {
     fruits = fruits.filterNot { fruit =>
@@ -72,8 +63,8 @@ class GameState(val gc: GraphicsContext) {
       if (allFruitsSliced) {
         nextLevel()
       } else {
-        gameOver = true
-        println("Game over. Some fruits were missed.")
+//        gameOver = true
+//        println("Game over. Some fruits were missed.")
       }
     }
   }
@@ -148,9 +139,10 @@ class GameState(val gc: GraphicsContext) {
         Thread.sleep(30)
         updateEntities()
         drawEntities()
+
       }
       println("Game loop ended. Drawing final state.")
-      drawEntities() // Final draw to display game over screen
+
     }
   }
 }

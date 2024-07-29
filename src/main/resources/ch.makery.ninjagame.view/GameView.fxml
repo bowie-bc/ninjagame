@@ -2,7 +2,6 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -35,10 +34,6 @@
          </VBox>
       </children>
    </StackPane>
-   <ButtonBar layoutX="413.0" layoutY="546.0" prefHeight="40.0" prefWidth="373.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="413.0">
-     <buttons>
-         <Button mnemonicParsing="false" onAction="#handleMusicOff" text="Music Off" />
-       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMusicOn" text="Music On" />
-     </buttons>
-   </ButtonBar>
+ <Button fx:id="onMusicButton" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleMusicOn" text="Music On" visible="false" />
+   <Button fx:id="offMusicButton" layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleMusicOff" text="Music Off" />
 </AnchorPane>

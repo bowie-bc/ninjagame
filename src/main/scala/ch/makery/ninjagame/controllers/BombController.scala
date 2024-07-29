@@ -14,7 +14,7 @@ object BombController {
     val velocityX = Random.nextDouble() * 2 - 1
     val velocityY = -6 - Random.nextDouble() * 2
     val weight = 1.1 + Random.nextDouble() * 0.2
-    Bomb(x, y, 150, 150, velocityX, velocityY, weight, 0.1, unslicedImage, slicedImage)
+    Bomb(x, y, 100, 100, velocityX, velocityY, weight, 0.1, unslicedImage, slicedImage)
   }
 
   def createBombs(count: Int): List[Bomb] = {

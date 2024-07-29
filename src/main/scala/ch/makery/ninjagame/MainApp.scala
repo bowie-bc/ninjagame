@@ -10,6 +10,8 @@ import scalafx.scene.layout.{AnchorPane, StackPane}
 import java.net.URL
 import javafx.{scene => jfxs}
 
+import scala.ch.makery.ninjagame.utilities.SoundManager
+
 
 object MainApp extends JFXApp {
 
