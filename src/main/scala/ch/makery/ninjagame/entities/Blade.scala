@@ -13,10 +13,10 @@ case class Blade(points: List[(Double, Double)]) {
   }
 
   def draw(gc: GraphicsContext): Unit = {
-    gc.setStroke(Color.White)
-    gc.setLineWidth(3)
+    gc.setStroke(Color.Green)
+    gc.setLineWidth(5)
 
-    val glow = new Glow(0.8) // Adjust the intensity of the glow here
+    val glow = new Glow(100) // Adjust the intensity of the glow here
     gc.setEffect(glow)
 
     if (points.nonEmpty) {

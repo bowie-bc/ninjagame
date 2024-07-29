@@ -62,7 +62,7 @@ class GameState(val gc: GraphicsContext) {
       println(s"Fruits and bombs are empty. All fruits sliced: ${allFruitsSliced}")
       if (allFruitsSliced) {
         nextLevel()
-      } else {
+//      } else {
 //        gameOver = true
 //        println("Game over. Some fruits were missed.")
       }

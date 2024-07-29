@@ -5,6 +5,7 @@ import scalafxml.core.macros.sfxml
 import javafx.event.ActionEvent
 
 import scala.ch.makery.ninjagame.MainApp
+import scala.ch.makery.ninjagame.utilities.SoundManager
 
 @sfxml
 class StartController(private val startButton: Button,
@@ -12,14 +13,16 @@ class StartController(private val startButton: Button,
                       private val nicknameField: TextField
                      ) {
 
-  def onStartButtonClick(event: ActionEvent): Unit = {
+  SoundManager.loopSound("/sounds/startbackgroundmusic.mp3")
+
+  def handleStart(event: ActionEvent): Unit = {
     MainApp.switchToGameScene()
-//    val nickname = nicknameField.text.value.trim
-//    if (nickname.nonEmpty) {
-//
-//    } else {
-//      println("Nickname cannot be empty")
-//    }
+    SoundManager.stopSound("/sounds/startbackgroundmusic.mp3")
+  }
+
+  def handleQuit(): Unit = {
+    println("Quit button clicked")
+    MainApp.quitGame()
   }
 
 

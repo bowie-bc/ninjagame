@@ -30,6 +30,9 @@ object MainApp extends JFXApp {
   stage = new PrimaryStage {
     title = "Fruit Ninja"
     scene = startScene
+
+
+
     onCloseRequest = handle {
       Platform.exit()
       System.exit(0)
