@@ -2,16 +2,23 @@ package scala.ch.makery.ninjagame.entities
 
 import scalafx.scene.canvas.GraphicsContext
 import scalafx.scene.paint.Color
+import scalafx.scene.effect.Glow
 
 case class Blade(points: List[(Double, Double)]) {
 
   def addPoint(x: Double, y: Double): Blade = {
-    Blade((x, y) :: points.take(10)) // Keep only the latest 10 points
+    val newPoints = (x, y) :: points
+    val maxLength = 50
+    Blade(newPoints.take(maxLength))
   }
 
   def draw(gc: GraphicsContext): Unit = {
-    gc.setStroke(Color.Blue)
+    gc.setStroke(Color.White)
     gc.setLineWidth(3)
+
+    val glow = new Glow(0.8) // Adjust the intensity of the glow here
+    gc.setEffect(glow)
+
     if (points.nonEmpty) {
       gc.beginPath()
       val (x0, y0) = points.head
@@ -21,5 +28,8 @@ case class Blade(points: List[(Double, Double)]) {
       }
       gc.strokePath()
     }
+
+    // Clear the effect after drawing
+    gc.setEffect(null)
   }
 }

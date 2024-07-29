@@ -1,13 +1,19 @@
 package scala.ch.makery.ninjagame.entities
 
-import scala.ch.makery.ninjagame.controllers.{FruitController, BombController}
+import scala.ch.makery.ninjagame.controllers.{BombController, FruitController}
 import scalafx.scene.canvas.GraphicsContext
+
 import scala.ch.makery.ninjagame.utilities.SoundManager
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, FontWeight}
+
 import scala.util.Random
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+
+
+import scala.ch.makery.ninjagame.MainApp
+
 
 class GameState(val gc: GraphicsContext) {
   var fruits: List[Fruit] = List()
@@ -28,6 +34,32 @@ class GameState(val gc: GraphicsContext) {
     }
 
     checkCollisions()
+  }
+
+
+  def checkCollisions(): Unit = {
+    fruits = fruits.filterNot { fruit =>
+      if (fruit.slice(blade.points.map(_._1), blade.points.map(_._2))) {
+        score += fruit.points
+        SoundManager.playSound("/sounds/slice.mp3")
+        println(s"Sliced a fruit worth ${fruit.points} points! Score: $score")
+        false // Do not remove the fruit from the list to keep drawing the sliced image
+      } else {
+        false
+      }
+    }
+
+    bombs = bombs.filterNot { bomb =>
+      if (blade.points.exists { case (x, y) => bomb.isHit(x, y) }) {
+        bomb.slice()
+        SoundManager.playSound("/sounds/explosion.mp3")
+        println("Hit a bomb! Game over.")
+        gameOver = true
+        false // Do not remove the bomb from the list to keep drawing the bombed image
+      } else {
+        false
+      }
+    }
   }
 
   def updateEntities(): Unit = {
@@ -62,31 +94,7 @@ class GameState(val gc: GraphicsContext) {
       gameOver = true
       println("No lives left! Game over.")
     }
-  }
 
-  def checkCollisions(): Unit = {
-    fruits = fruits.filterNot { fruit =>
-      if (fruit.slice(blade.points.map(_._1), blade.points.map(_._2))) {
-        score += fruit.points
-        SoundManager.playSound("/slice.mp3")
-        println(s"Sliced a fruit worth ${fruit.points} points! Score: $score")
-        false // Do not remove the fruit from the list to keep drawing the sliced image
-      } else {
-        false
-      }
-    }
-
-    bombs = bombs.filterNot { bomb =>
-      if (blade.points.exists { case (x, y) => bomb.isHit(x, y) }) {
-        bomb.slice()
-        SoundManager.playSound("/explosion.mp3")
-        println("Hit a bomb! Game over.")
-        gameOver = true
-        false // Do not remove the bomb from the list to keep drawing the bombed image
-      } else {
-        false
-      }
-    }
   }
 
   def addFruit(fruit: Fruit): Unit = {
@@ -107,40 +115,6 @@ class GameState(val gc: GraphicsContext) {
     fruits.foreach(_.draw(gc))
 
     bombs.foreach(_.draw(gc))
-
-//    drawScore()
-//    drawLives()
-//    drawLevel()
-
-    if (gameOver) {
-      drawGameOver()
-    }
-  }
-
-//  def drawScore(): Unit = {
-//    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
-//    gc.setFill(Color.Black)
-//    gc.fillText(s"Score: $score", 10, 40)
-//  }
-//
-//  def drawLives(): Unit = {
-//    val heartRadius = 15
-//    for (i <- 0 until lives) {
-//      gc.setFill(Color.Red)
-//      gc.fillOval(700 + i * (heartRadius * 2 + 10), 10, heartRadius * 2, heartRadius * 2)
-//    }
-//  }
-//
-//  def drawLevel(): Unit = {
-//    gc.setFont(Font.font("Arial", FontWeight.Bold, 36))
-//    gc.setFill(Color.Black)
-//    gc.fillText(s"Level: $level", 10, 80)
-//  }
-
-  def drawGameOver(): Unit = {
-    gc.setFont(Font.font("Arial", FontWeight.Bold, 72))
-    gc.setFill(Color.Red)
-    gc.fillText("Game Over", 200, 300)
   }
 
   def allFruitsSliced: Boolean = {
@@ -175,6 +149,7 @@ class GameState(val gc: GraphicsContext) {
         updateEntities()
         drawEntities()
       }
+      println("Game loop ended. Drawing final state.")
       drawEntities() // Final draw to display game over screen
     }
   }

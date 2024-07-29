@@ -1,0 +1,84 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');*/
+
+.stackpane-background {
+    -fx-background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+}
+
+.gameview-background{
+    -fx-background-image: url("/images/background2.jpg"); /* Background image for game view */
+    -fx-background-size: cover;
+}
+
+.startview-background{
+    -fx-background-image: url("/images/startbackground.jpg"); /* Background image for game view */
+    -fx-background-size: cover;
+}
+
+.label {
+    -fx-font-size: 40pt;
+    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+    -fx-font-family: "Gayatri";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
+}
+
+.label-big {
+    -fx-font-size: 70pt;
+    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+    -fx-font-family: "Gayatri";
+    -fx-text-fill: red;
+    -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
+}
+
+.title-big {
+    -fx-font-size: 80pt;
+    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+    -fx-font-family: "Gayatri";
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
+}
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+

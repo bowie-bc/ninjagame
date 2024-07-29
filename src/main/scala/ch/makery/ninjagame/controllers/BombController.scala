@@ -5,8 +5,8 @@ import scalafx.scene.image.Image
 import scala.util.Random
 
 object BombController {
-  private val unslicedImage = new Image(getClass.getResourceAsStream("/bomb.png"))
-  private val slicedImage = new Image(getClass.getResourceAsStream("/bombed.png"))
+  private val unslicedImage = new Image(getClass.getResourceAsStream("/images/bomb.png"))
+  private val slicedImage = new Image(getClass.getResourceAsStream("/images/bombed.png"))
 
   def createBomb(): Bomb = {
     val x = Random.nextDouble() * 800
