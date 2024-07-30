@@ -7,6 +7,7 @@ import scala.util.Random
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
+
 class GameState(val gc: GraphicsContext) {
   var fruits: List[Fruit] = List()
   var bombs: List[Bomb] = List()
@@ -64,9 +65,6 @@ class GameState(val gc: GraphicsContext) {
       println(s"Fruits and bombs are empty. All fruits sliced: ${allFruitsSliced}")
       if (allFruitsSliced) {
         nextLevel()
-//      } else {
-//        gameOver = true
-//        println("Game over. Some fruits were missed.")
       }
     }
   }
@@ -122,7 +120,7 @@ class GameState(val gc: GraphicsContext) {
     fruits = List()
     bombs = List()
 
-    val fruitsToSpawn = Random.nextInt(8) + 3 // Random number of fruits between 3 and 10
+    val fruitsToSpawn = Random.nextInt(9) + 1 // Random number of fruits between 1 and 10
     println(s"Spawning $fruitsToSpawn fruits for level $level")
     for (_ <- 1 to fruitsToSpawn) {
       addFruit(FruitController.createFruit())

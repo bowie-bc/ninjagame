@@ -8,6 +8,7 @@ import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import java.net.URL
 import javafx.{scene => jfxs}
 
+
 object MainApp extends JFXApp {
 
   //Initialize the primary stage
@@ -17,45 +18,42 @@ object MainApp extends JFXApp {
     }
   }
 
-  def switchToStartView(): Unit = {
-    println("Switching to startscene")
-    val startResource: URL = getClass.getResource("/ch.makery.ninjagame.view/StartView.fxml")
-    if (startResource == null) {
-      throw new RuntimeException("Cannot load FXML resource")
+  def loadView(resourcePath: String, title: String): Unit = {
+    val resource: URL = getClass.getResource(resourcePath)
+    if (resource == null) {
+      println(s"$resourcePath resource not found")
+      throw new RuntimeException(s"Cannot load FXML resource: $resourcePath")
     }
 
-    val startLoader = new FXMLLoader(startResource, NoDependencyResolver)
-    startLoader.load()
-    println("Game FXML loaded successfully")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    try {
+      loader.load()
+    } catch {
+      case e: Exception =>
+        println(s"Failed to load $resourcePath: ${e.getMessage}")
+        throw e
+    }
 
-    val startRoot = startLoader.getRoot[jfxs.layout.AnchorPane]
-    val startScene = new Scene(startRoot)
-    println("Start scene created")
+    val root = loader.getRoot[jfxs.layout.AnchorPane]
+    val scene = new Scene(root)
+    stage.scene = scene
+    stage.title = title
+    println(s"$title set")
+  }
 
-    stage.scene = startScene
-    stage.title = "Ninja Game: Start View"
-    println("Start scene set")
+  def switchToStartView(): Unit = {
+    println("Switching to start scene")
+    loadView("/ch.makery.ninjagame.view/StartView.fxml", "Ninja Game: Start View")
   }
 
   def switchToGameView(): Unit = {
     println("Switching to game scene")
-    val gameResource: URL = getClass.getResource("/ch.makery.ninjagame.view/GameView.fxml")
-    if (gameResource == null) {
-      throw new RuntimeException("Cannot load FXML resource")
-    }
+    loadView("/ch.makery.ninjagame.view/GameView.fxml", "Ninja Game: Game View")
+  }
 
-    val gameLoader = new FXMLLoader(gameResource, NoDependencyResolver)
-    gameLoader.load()
-    println("Game View loaded successfully")
-
-    val gameRoot = gameLoader.getRoot[jfxs.layout.AnchorPane]
-    println(s"Game Root: $gameRoot") // Debug statement to ensure root is loaded
-    val gameScene = new Scene(gameRoot)
-    println("Game scene created")
-
-    stage.scene = gameScene
-    stage.title = "Ninja Game: Game View"
-    println("Game scene set")
+  def switchToHowToPlayView(): Unit = {
+    println("Switching to how to play scene")
+    loadView("/ch.makery.ninjagame.view/HowToPlayView.fxml", "Ninja Game: How To Play View")
   }
 
   def restartGame(): Unit = {

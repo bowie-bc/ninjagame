@@ -46,3 +46,4 @@ case class Fruit(var x: Double,
     px >= x && px <= x + width && py >= y && py <= y + height
   }
 }
+

@@ -29,6 +29,11 @@
          <VBox alignment="CENTER" spacing="10.0">
             <children>
                <Label styleClass="label-big" stylesheets="@styles.css" text="Game Over" />
+               <Label fx:id="totalScoreLabel" contentDisplay="CENTER" styleClass="label-medium" stylesheets="@styles.css" text="Total Score: 0 " textFill="WHITE">
+                  <font>
+                     <Font name="System Bold" size="41.0" />
+                  </font>
+               </Label>
                <Button onAction="#handleRestart" prefHeight="50.0" prefWidth="250.0" styleClass="button-game" stylesheets="@styles.css" text="Restart" />
                <Button onAction="#handleQuitToStart" prefHeight="50.0" prefWidth="250.0" styleClass="button-game" stylesheets="@styles.css" text="Return to Start Menu" />
                <Button onAction="#handleQuit" prefHeight="50.0" prefWidth="250.0" styleClass="button-game" stylesheets="@styles.css" text="Quit Game" />

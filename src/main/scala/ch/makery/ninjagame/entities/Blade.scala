@@ -13,7 +13,7 @@ case class Blade(points: List[(Double, Double)]) {
   }
 
   def draw(gc: GraphicsContext): Unit = {
-    gc.setStroke(Color.Green)
+    gc.setStroke(Color.Orange)
     gc.setLineWidth(5)
 
     val glow = new Glow(100) // Adjust the intensity of the glow here

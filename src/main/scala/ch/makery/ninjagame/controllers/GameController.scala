@@ -9,7 +9,6 @@ import scalafx.scene.layout.StackPane
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafxml.core.macros.sfxml
-
 import scala.ch.makery.ninjagame.utilities.SoundManager
 
 @sfxml
@@ -17,6 +16,7 @@ class GameController(private val gameCanvas: Canvas,
                      private val scoreLabel: Label,
                      private val livesLabel: Label,
                      private val levelLabel: Label,
+                     private val totalScoreLabel: Label,
                      private val gameOverPane: StackPane,
                      private val onMusicButton: Button,
                      private val offMusicButton: Button,
@@ -47,8 +47,10 @@ class GameController(private val gameCanvas: Canvas,
     livesLabel.text = s"Lives: ${gameState.lives}"
     levelLabel.text = s"Level: ${gameState.level}"
     if (gameState.gameOver) {
+      totalScoreLabel.text = s"Total Score: ${gameState.score}"
       gameOverPane.visible = true
       SoundManager.stopSound("/sounds/backgroundmusic.mp3")
+      SoundManager.playSound("/sounds/defeat.mp3")
     } else {
       javafx.application.Platform.runLater(() => updateUI())
     }

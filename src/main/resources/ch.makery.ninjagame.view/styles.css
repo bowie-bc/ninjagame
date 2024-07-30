@@ -1,7 +1,7 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');*/
 
 .stackpane-background {
-    -fx-background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    -fx-background-color: rgba(0, 0, 0, 0.8); /* Black background with 50% opacity */
 }
 
 .gameview-background{
@@ -16,8 +16,7 @@
 
 
 .label {
-    -fx-font-size: 15pt;
-    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+    -fx-font-size: 20pt;
     -fx-font-family: "Gayatri";
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
@@ -25,23 +24,27 @@
 
 .label-medium {
     -fx-font-size: 40pt;
-    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+}
+
+.AnchorPane {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
+.label-big {
+    -fx-font-size: 70pt;
+    -fx-text-fill: red;
+}
+
+.title-big {
+    -fx-font-size: 80pt;
     -fx-font-family: "Gayatri";
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
 }
 
-.label-big {
-    -fx-font-size: 70pt;
-    /*-fx-font-family: "Protest Revolution", sans-serif;*/
-    -fx-font-family: "Gayatri";
-    -fx-text-fill: red;
-    -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
-}
-
-.title-big {
-    -fx-font-size: 80pt;
-    /*-fx-font-family: "Protest Revolution", sans-serif;*/
+.title-medium {
+    -fx-font-size: 60pt;
     -fx-font-family: "Gayatri";
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);
