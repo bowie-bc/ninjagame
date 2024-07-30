@@ -1,7 +1,6 @@
 package scala.ch.makery.ninjagame.entities
 
 import scalafx.scene.image.Image
-import scalafx.scene.paint.Color
 import scalafx.scene.canvas.GraphicsContext
 
 case class Bomb(var x: Double,
@@ -15,6 +14,7 @@ case class Bomb(var x: Double,
                 var unslicedImage: Image,
                 var slicedImage: Image
                ) {
+
   var isSliced: Boolean = false
 
   def move(): Unit = {

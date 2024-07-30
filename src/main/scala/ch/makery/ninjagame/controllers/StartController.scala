@@ -16,7 +16,7 @@ class StartController(private val startButton: Button,
   SoundManager.loopSound("/sounds/startbackgroundmusic.mp3")
 
   def handleStart(event: ActionEvent): Unit = {
-    MainApp.switchToGameScene()
+    MainApp.switchToGameView()
     SoundManager.stopSound("/sounds/startbackgroundmusic.mp3")
   }
 

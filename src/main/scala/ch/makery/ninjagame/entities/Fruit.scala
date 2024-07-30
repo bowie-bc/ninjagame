@@ -1,7 +1,6 @@
 package scala.ch.makery.ninjagame.entities
 
 import scalafx.scene.image.Image
-import scalafx.scene.paint.Color
 import scalafx.scene.canvas.GraphicsContext
 
 case class Fruit(var x: Double,
@@ -16,6 +15,7 @@ case class Fruit(var x: Double,
                  var unslicedImage: Image,
                  var slicedImage: Image
                 ) {
+
   var isSliced: Boolean = false
 
   def move(): Unit = {

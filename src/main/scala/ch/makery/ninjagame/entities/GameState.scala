@@ -21,7 +21,9 @@ class GameState(val gc: GraphicsContext) {
 
     if (isMouseDown) {
       blade = blade.addPoint(mouseX, mouseY)
-    } else {
+    }
+
+    else {
       blade = Blade(Nil)
     }
 
