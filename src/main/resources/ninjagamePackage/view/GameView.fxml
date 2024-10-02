@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="gameview-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ninjagamePackage.controllers.GameViewController">
+   <Canvas fx:id="gameCanvas" height="768.0" width="1024.0" />
+   <Label fx:id="scoreLabel" mouseTransparent="true" styleClass="label-medium" text="Score: 0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+   <Label fx:id="levelLabel" mouseTransparent="true" styleClass="label-medium" text="Level: 1" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="70.0" />
+   <Label fx:id="livesLabel" mouseTransparent="true" styleClass="label-medium" text="Lives Left: 3" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0" />
+   <Label fx:id="popupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="174.0" mouseTransparent="true" prefHeight="38.0" prefWidth="870.0" styleClass="label-medium" text="Maximum bomb increased by 1, Maximum bombs: 1" visible="false" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" />
+   <Button fx:id="musicOnOffButton" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMusicOnOff" prefHeight="50.0" prefWidth="140.0" styleClass="button-gameview" text="Music Off" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" />
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="859.0" layoutY="693.0" mnemonicParsing="false" onAction="#handlePause" prefHeight="50.0" prefWidth="140.0" styleClass="button-gameview" text="Pause" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+   <StackPane fx:id="gameOverOverlay" prefHeight="768.0" prefWidth="1024.0" styleClass="gameover-background" visible="false">
+      <VBox alignment="TOP_CENTER" spacing="10.0" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+         <padding>
+            <Insets top="120.0" />
+         </padding>
+         <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-gameover" text="Game Over!">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+         </Label>
+         <Label fx:id="totalScoreLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="label-big" text="Total Score Obtained is 0" />
+         <Label fx:id="totalLevelLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="label-big" text="Total Levels Survived is 1">
+            <VBox.margin>
+               <Insets bottom="50.0" />
+            </VBox.margin>
+         </Label>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleRestart" prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Restart Game" />
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleReturnToStart" prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Return To Start" />
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleQuit" prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Quit Game" />
+      </VBox>
+   </StackPane>
+   <StackPane fx:id="pauseOverlay" prefHeight="768.0" prefWidth="1024.0" styleClass="gameover-background"
+              visible="false">
+      <VBox alignment="CENTER" spacing="10.0" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets/>
+         </StackPane.margin>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleResume"
+                 prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Resume Game"/>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleReturnToStart"
+                 prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Return To Start"/>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleQuit"
+                 prefHeight="60.0" prefWidth="283.0" styleClass="button-gameover" text="Quit Game"/>
+      </VBox>
+   </StackPane>
+</AnchorPane>

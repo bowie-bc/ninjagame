@@ -1,0 +1,78 @@
+/*Download the GayatriRegular.tff font to local computer and remove the @font-face below to view the styled fxml file in Scene Builder*/
+@font-face {
+    src: url('/ninjagamePackage/view/GayatriRegular.ttf');
+}
+
+.startview-background {
+    -fx-background-image: url("/images/startbg.jpg");
+    -fx-background-size: cover;
+}
+
+.gameview-background {
+    -fx-background-image: url("/images/gamebg.jpg");
+    -fx-background-size: cover;
+}
+
+.gameover-background {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+.label {
+    -fx-font-family: Gayatri;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, black, 5, 0.5, 2, 2);
+}
+
+.label-medium {
+    -fx-font-size: 25pt;
+}
+
+.label-big {
+    -fx-font-size: 30pt;
+}
+
+.label-gameover {
+    -fx-font-size: 70pt;
+    -fx-text-fill: red;
+}
+
+.label-title {
+    -fx-font-size: 100pt;
+}
+
+.label-subtitle {
+    -fx-font-size: 60pt;
+}
+
+.button{
+    -fx-padding: 5, 15, 5, 15;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-image: url("/images/buttonbg.jpg");
+    -fx-background-size: cover;
+    -fx-font-family: Gayatri;
+    -fx-text-fill: black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button-startview {
+    -fx-font-size: 25pt;
+}
+
+.button-gameview {
+    -fx-font-size: 20pt;
+}
+
+.button-gameover {
+    -fx-font-size: 25pt;
+}
+
+.button:hover {
+    -fx-border-color: orange;
+    -fx-border-width: 4
+}
+
+.gridpane {
+    -fx-border-color: orange;
+    -fx-border-width: 2;
+}

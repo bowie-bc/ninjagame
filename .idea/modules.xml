@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/finalprojecttest.iml" filepath="$PROJECT_DIR$/.idea/modules/finalprojecttest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/finalprojecttest.finalprojecttest-build.iml" filepath="$PROJECT_DIR$/.idea/modules/finalprojecttest.finalprojecttest-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ninjagame.iml" filepath="$PROJECT_DIR$/.idea/modules/ninjagame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ninjagame.ninjagame-build.iml" filepath="$PROJECT_DIR$/.idea/modules/ninjagame.ninjagame-build.iml" />
     </modules>
   </component>
 </project>
